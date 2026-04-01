@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bhavishya Gupta | IIT Kanpur</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root{
+  --bg:#08090f;
+  --bg2:#0e0f1a;
+  --bg3:#13142a;
+  --card:#131423;
+  --card2:#1a1b30;
+  --border:rgba(99,102,241,0.18);
+  --border2:rgba(99,102,241,0.35);
+  --indigo:#6366f1;
+  --cyan:#22d3ee;
+  --gold:#f5c518;
+  --pink:#f472b6;
+  --text:#e8e9f3;
+  --text2:#9899b8;
+  --text3:#5c5d80;
+  --white:#ffffff;
+  --grad:linear-gradient(135deg,#6366f1,#22d3ee);
+  --shadow:0 25px 60px rgba(0,0,0,0.6);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-weight:400;
+  cursor:none;
+  overflow-x:hidden;
+}
+
+/* ─── CURSOR ─── */
+.cursor{
+  width:8px;height:8px;
+  background:var(--indigo);
+  border-radius:50%;
+  position:fixed;top:0;left:0;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:width .2s,height .2s,background .2s;
+}
+.cursor-ring{
+  width:36px;height:36px;
+  border:1.5px solid rgba(99,102,241,0.5);
+  border-radius:50%;
+  position:fixed;top:0;left:0;
+  pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:transform .12s ease,width .2s,height .2s,border-color .2s;
+}
+.cursor.active{width:12px;height:12px;background:var(--cyan);}
+.cursor-ring.active{width:50px;height:50px;border-color:var(--cyan);}
+
+/* ─── NOISE OVERLAY ─── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:0.025;pointer-events:none;z-index:0;
+}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 4rem;
+  background:rgba(8,9,15,0.7);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:padding .3s;
+}
+nav.scrolled{padding:.8rem 4rem;}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;font-weight:700;
+  background:var(--grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:0.02em;
+}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{
+  color:var(--text2);font-size:.85rem;font-weight:500;
+  text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;
+  transition:color .2s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;
+  width:0;height:1.5px;background:var(--grad);
+  transition:width .3s;
+}
+.nav-links a:hover,
+.nav-links a.active{color:var(--white);}
+.nav-links a:hover::after,
+.nav-links a.active::after{width:100%;}
+.nav-cta{
+  background:var(--grad);
+  color:#fff;padding:.55rem 1.4rem;border-radius:50px;
+  text-decoration:none;font-size:.82rem;font-weight:600;
+  letter-spacing:0.04em;transition:opacity .2s,transform .2s;
+}
+.nav-cta:hover{opacity:.85;transform:translateY(-1px);}
+.nav-mobile-btn{display:none;background:none;border:none;cursor:pointer;color:var(--text);}
+
+/* ─── HERO ─── */
+#hero{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  padding:6rem 4rem 4rem;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 50%,rgba(99,102,241,0.12) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 30%,rgba(34,211,238,0.08) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 40% at 60% 80%,rgba(244,114,182,0.06) 0%,transparent 60%);
+  animation:bgShift 12s ease-in-out infinite alternate;
+}
+@keyframes bgShift{
+  0%{transform:scale(1);}
+  100%{transform:scale(1.05);}
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(99,102,241,0.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(99,102,241,0.05) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);
+}
+.hero-inner{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1fr auto;gap:5rem;
+  align-items:center;max-width:1200px;width:100%;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:rgba(99,102,241,0.12);border:1px solid var(--border2);
+  border-radius:50px;padding:.4rem 1rem;
+  font-size:.75rem;font-weight:600;color:var(--cyan);
+  letter-spacing:0.08em;text-transform:uppercase;
+  margin-bottom:1.5rem;
+}
+.hero-badge .dot{
+  width:6px;height:6px;background:var(--cyan);
+  border-radius:50%;animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1);}
+  50%{opacity:.5;transform:scale(1.3);}
+}
+.hero-greeting{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;font-weight:300;font-style:italic;
+  color:var(--text2);margin-bottom:.4rem;
+}
+h1.hero-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3rem,6vw,5.5rem);
+  font-weight:700;line-height:1;
+  color:var(--white);margin-bottom:1rem;
+  letter-spacing:-0.01em;
+}
+h1.hero-name span{
+  background:var(--grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-typed-wrapper{
+  font-size:1.15rem;font-weight:400;
+  color:var(--text2);margin-bottom:1.8rem;
+  min-height:1.8rem;
+}
+.hero-typed-wrapper span.typed{color:var(--indigo);font-weight:500;}
+.hero-typed-wrapper .cursor-blink{
+  display:inline-block;width:2px;height:1.1em;
+  background:var(--indigo);margin-left:2px;
+  vertical-align:middle;animation:blink .8s infinite;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.hero-desc{
+  color:var(--text2);line-height:1.8;
+  max-width:550px;margin-bottom:2.2rem;font-size:.95rem;
+}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-primary{
+  background:var(--grad);color:#fff;
+  padding:.75rem 2rem;border-radius:50px;
+  text-decoration:none;font-size:.9rem;font-weight:600;
+  transition:transform .2s,box-shadow .2s;
+  box-shadow:0 8px 30px rgba(99,102,241,0.3);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(99,102,241,0.4);}
+.btn-outline{
+  background:transparent;color:var(--text);
+  padding:.75rem 2rem;border-radius:50px;
+  text-decoration:none;font-size:.9rem;font-weight:500;
+  border:1px solid var(--border2);
+  transition:all .2s;
+}
+.btn-outline:hover{border-color:var(--indigo);color:var(--indigo);}
+.hero-socials{display:flex;gap:1rem;margin-top:2rem;}
+.social-btn{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--card);border:1px solid var(--border);
+  color:var(--text2);text-decoration:none;font-size:.95rem;
+  transition:all .2s;
+}
+.social-btn:hover{background:var(--indigo);border-color:var(--indigo);color:#fff;transform:translateY(-3px);}
+
+.hero-photo-wrap{
+  position:relative;
+  width:320px;height:380px;flex-shrink:0;
+}
+.hero-photo-ring{
+  position:absolute;inset:-10px;
+  border-radius:40% 60% 55% 45%/45% 45% 55% 55%;
+  background:var(--grad);
+  animation:morphRing 8s ease-in-out infinite;
+  opacity:.15;
+}
+@keyframes morphRing{
+  0%{border-radius:40% 60% 55% 45%/45% 45% 55% 55%;}
+  33%{border-radius:60% 40% 45% 55%/55% 55% 45% 45%;}
+  66%{border-radius:50% 50% 60% 40%/40% 60% 50% 50%;}
+  100%{border-radius:40% 60% 55% 45%/45% 45% 55% 55%;}
+}
+.hero-photo-border{
+  position:absolute;inset:-3px;
+  border-radius:38% 62% 53% 47%/47% 43% 57% 53%;
+  background:var(--grad);
+  animation:morphRing 8s ease-in-out infinite;
+  animation-delay:-2s;
+}
+.hero-photo{
+  width:100%;height:100%;object-fit:cover;
+  border-radius:38% 62% 53% 47%/47% 43% 57% 53%;
+  animation:morphRing 8s ease-in-out infinite;
+  animation-delay:-2s;
+  position:relative;z-index:1;
+  background:var(--card2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:5rem;color:var(--text3);
+}
+.hero-photo img{
+  width:100%;height:100%;object-fit:cover;
+  border-radius:inherit;
+}
+.hero-stat-badges{
+  position:absolute;
+  display:flex;flex-direction:column;gap:.8rem;
+  right:-2.5rem;top:50%;transform:translateY(-50%);
+}
+.stat-badge{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:.7rem 1rem;
+  backdrop-filter:blur(10px);
+  text-align:center;min-width:90px;
+}
+.stat-badge .stat-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-weight:700;
+  background:var(--grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1;
+}
+.stat-badge .stat-lbl{
+  font-size:.65rem;color:var(--text3);
+  font-weight:500;letter-spacing:0.05em;text-transform:uppercase;
+}
+
+/* ─── SECTIONS ─── */
+section{padding:7rem 4rem;position:relative;z-index:1;}
+.section-tag{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--indigo);margin-bottom:1rem;
+}
+.section-tag .line{
+  width:30px;height:1.5px;background:var(--indigo);display:inline-block;
+}
+h2.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4vw,3.2rem);font-weight:700;
+  color:var(--white);margin-bottom:4rem;
+  line-height:1.1;
+}
+h2.section-title em{
+  font-style:italic;
+  background:var(--grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.container{max-width:1200px;margin:0 auto;}
+.separator{
+  height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);
+  margin:0 4rem;
+}
+
+/* ─── ABOUT ─── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+.about-img-wrap{position:relative;}
+.about-img{
+  width:100%;aspect-ratio:4/5;object-fit:cover;
+  border-radius:24px;
+  background:var(--card2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:6rem;color:var(--text3);
+  overflow:hidden;
+}
+.about-img img{width:100%;height:100%;object-fit:cover;border-radius:inherit;}
+.about-img-overlay{
+  position:absolute;inset:0;border-radius:24px;
+  background:linear-gradient(180deg,transparent 60%,var(--bg) 100%);
+}
+.about-edu-card{
+  position:absolute;bottom:-1.5rem;right:-1.5rem;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:1rem 1.2rem;
+  backdrop-filter:blur(10px);
+}
+.about-edu-card .edu-inst{
+  font-size:.75rem;font-weight:700;color:var(--indigo);
+  letter-spacing:0.05em;
+}
+.about-edu-card .edu-cpi{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;font-weight:700;color:var(--white);
+}
+.about-edu-card .edu-sub{font-size:.7rem;color:var(--text3);}
+.about-content h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.8rem;font-weight:600;color:var(--white);
+  margin-bottom:1rem;
+}
+.about-content p{
+  color:var(--text2);line-height:1.9;margin-bottom:1.2rem;font-size:.95rem;
+}
+.about-facts{
+  display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem;
+}
+.fact-item{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:1rem;
+}
+.fact-item i{color:var(--indigo);margin-bottom:.4rem;font-size:1.1rem;}
+.fact-item .fact-label{font-size:.7rem;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;}
+.fact-item .fact-value{font-size:.9rem;color:var(--white);font-weight:500;margin-top:.2rem;}
+
+/* ─── EDUCATION TIMELINE ─── */
+.edu-timeline{position:relative;}
+.edu-timeline::before{
+  content:'';
+  position:absolute;left:24px;top:0;bottom:0;
+  width:1px;background:var(--border2);
+}
+.edu-item{
+  display:flex;gap:2rem;margin-bottom:2.5rem;
+  opacity:0;transform:translateX(-20px);
+  transition:opacity .5s,transform .5s;
+}
+.edu-item.visible{opacity:1;transform:none;}
+.edu-dot{
+  width:50px;height:50px;border-radius:50%;flex-shrink:0;
+  background:var(--card);border:2px solid var(--indigo);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--indigo);font-size:.95rem;
+  position:relative;z-index:1;
+}
+.edu-content{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:1.5rem;flex:1;
+  transition:border-color .3s,transform .3s;
+}
+.edu-content:hover{border-color:var(--border2);transform:translateX(4px);}
+.edu-year{font-size:.75rem;font-weight:600;color:var(--indigo);letter-spacing:0.08em;text-transform:uppercase;}
+.edu-degree{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--white);margin:.3rem 0;}
+.edu-inst-name{font-size:.9rem;color:var(--text2);margin-bottom:.5rem;}
+.edu-score{
+  display:inline-block;background:rgba(99,102,241,0.1);
+  border:1px solid rgba(99,102,241,0.3);border-radius:50px;
+  padding:.25rem .8rem;font-size:.8rem;font-weight:600;color:var(--indigo);
+}
+
+/* ─── EXPERIENCE ─── */
+.exp-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:2rem;margin-bottom:2rem;
+  transition:all .3s;position:relative;overflow:hidden;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .5s,transform .5s,border-color .3s;
+}
+.exp-card.visible{opacity:1;transform:none;}
+.exp-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--grad);
+}
+.exp-card:hover{border-color:var(--border2);box-shadow:0 20px 60px rgba(0,0,0,0.4);}
+.exp-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.5rem;}
+.exp-company{font-size:.8rem;font-weight:600;color:var(--cyan);letter-spacing:0.08em;text-transform:uppercase;}
+.exp-role{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--white);}
+.exp-mentor{font-size:.82rem;color:var(--text2);margin-top:.3rem;}
+.exp-period{
+  background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.2);
+  border-radius:50px;padding:.4rem 1rem;
+  font-size:.78rem;font-weight:600;color:var(--cyan);
+  white-space:nowrap;flex-shrink:0;
+}
+.exp-section{margin-bottom:1rem;}
+.exp-section-title{
+  font-size:.72rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.1em;color:var(--text3);margin-bottom:.6rem;
+}
+.exp-bullets{list-style:none;}
+.exp-bullets li{
+  position:relative;padding-left:1.2rem;
+  color:var(--text2);font-size:.88rem;line-height:1.7;
+  margin-bottom:.4rem;
+}
+.exp-bullets li::before{
+  content:'→';position:absolute;left:0;color:var(--indigo);
+  font-size:.75rem;top:.15rem;
+}
+.exp-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem;}
+.exp-tag{
+  background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);
+  border-radius:50px;padding:.25rem .75rem;
+  font-size:.72rem;color:var(--text2);
+}
+
+/* ─── SKILLS ─── */
+#skills{background:var(--bg2);}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+.skill-cat{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:1.5rem;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .4s,transform .4s,border-color .3s;
+}
+.skill-cat.visible{opacity:1;transform:none;}
+.skill-cat:hover{border-color:var(--border2);}
+.skill-cat-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:rgba(99,102,241,0.12);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--indigo);font-size:1rem;margin-bottom:.8rem;
+}
+.skill-cat-name{
+  font-weight:600;font-size:.9rem;color:var(--white);margin-bottom:1rem;
+}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.4rem;}
+.skill-tag{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:6px;padding:.25rem .6rem;
+  font-size:.75rem;color:var(--text2);
+  transition:all .2s;
+}
+.skill-tag:hover{background:rgba(99,102,241,0.15);border-color:var(--indigo);color:var(--indigo);}
+
+/* ─── PROJECTS ─── */
+.projects-filter{
+  display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:3rem;
+}
+.filter-btn{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:50px;padding:.5rem 1.2rem;
+  font-size:.8rem;font-weight:500;color:var(--text2);
+  cursor:pointer;transition:all .2s;
+}
+.filter-btn:hover,
+.filter-btn.active{
+  background:rgba(99,102,241,0.15);
+  border-color:var(--indigo);color:var(--indigo);
+}
+.projects-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:1.5rem;
+}
+.project-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:20px;overflow:hidden;
+  transition:all .3s;cursor:pointer;
+  opacity:0;transform:translateY(20px);
+}
+.project-card.visible{opacity:1;transform:none;}
+.project-card:hover{
+  border-color:var(--border2);
+  transform:translateY(-6px);
+  box-shadow:0 30px 70px rgba(0,0,0,0.5);
+}
+.project-card.hidden{display:none;}
+.project-card-top{
+  height:180px;position:relative;overflow:hidden;
+  background:var(--bg3);
+  display:flex;align-items:center;justify-content:center;
+}
+.project-card-icon{
+  font-size:3.5rem;color:rgba(99,102,241,0.3);
+  transition:transform .3s,color .3s;
+}
+.project-card:hover .project-card-icon{transform:scale(1.1);color:rgba(99,102,241,0.5);}
+.project-overlay-grad{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(34,211,238,0.05));
+}
+.project-card-body{padding:1.5rem;}
+.project-cat-badge{
+  display:inline-block;
+  font-size:.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  padding:.2rem .6rem;border-radius:4px;margin-bottom:.8rem;
+}
+.badge-ml{background:rgba(99,102,241,0.15);color:var(--indigo);}
+.badge-chem{background:rgba(34,211,238,0.12);color:var(--cyan);}
+.badge-pm{background:rgba(245,197,24,0.12);color:var(--gold);}
+.badge-data{background:rgba(244,114,182,0.12);color:var(--pink);}
+.project-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;font-weight:600;color:var(--white);
+  margin-bottom:.6rem;line-height:1.3;
+}
+.project-desc{font-size:.84rem;color:var(--text2);line-height:1.7;margin-bottom:1rem;}
+.project-outcome{
+  font-size:.8rem;color:var(--cyan);
+  display:flex;align-items:flex-start;gap:.4rem;
+}
+.project-outcome i{margin-top:.1rem;flex-shrink:0;}
+.project-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:1rem;padding-top:1rem;
+  border-top:1px solid var(--border);
+}
+.project-mentor{font-size:.75rem;color:var(--text3);}
+.project-arrow{
+  width:30px;height:30px;border-radius:50%;
+  background:rgba(99,102,241,0.1);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--indigo);font-size:.75rem;
+  transition:all .2s;
+}
+.project-card:hover .project-arrow{background:var(--indigo);border-color:var(--indigo);color:#fff;}
+
+/* ─── MODAL ─── */
+.modal-overlay{
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(0,0,0,.75);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  padding:2rem;opacity:0;visibility:hidden;transition:all .3s;
+}
+.modal-overlay.open{opacity:1;visibility:visible;}
+.modal{
+  background:var(--card);border:1px solid var(--border2);
+  border-radius:24px;max-width:700px;width:100%;
+  max-height:85vh;overflow-y:auto;
+  transform:translateY(20px) scale(.98);
+  transition:transform .3s;
+}
+.modal-overlay.open .modal{transform:none;}
+.modal-header{
+  padding:2rem 2rem 0;
+  display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;
+}
+.modal-close{
+  background:none;border:none;cursor:pointer;
+  color:var(--text3);font-size:1.2rem;
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--bg3);transition:all .2s;flex-shrink:0;
+}
+.modal-close:hover{color:var(--white);background:var(--indigo);}
+.modal-body{padding:1.5rem 2rem 2rem;}
+.modal-badge{margin-bottom:.5rem;}
+.modal-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.8rem;font-weight:700;color:var(--white);
+  line-height:1.2;margin-bottom:.5rem;
+}
+.modal-meta{font-size:.82rem;color:var(--text2);margin-bottom:1.5rem;}
+.modal-section-label{
+  font-size:.72rem;font-weight:700;text-transform:uppercase;
+  letter-spacing:0.1em;color:var(--text3);margin:1.2rem 0 .6rem;
+}
+.modal-list{list-style:none;}
+.modal-list li{
+  position:relative;padding-left:1.2rem;
+  color:var(--text2);font-size:.88rem;line-height:1.7;margin-bottom:.4rem;
+}
+.modal-list li::before{content:'→';position:absolute;left:0;color:var(--indigo);}
+
+/* ─── COMPETITIONS ─── */
+#competitions{background:var(--bg2);}
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:2rem;}
+.comp-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:2rem;
+  position:relative;overflow:hidden;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .5s,transform .5s,border-color .3s,box-shadow .3s;
+}
+.comp-card.visible{opacity:1;transform:none;}
+.comp-card:hover{border-color:var(--border2);box-shadow:0 25px 60px rgba(0,0,0,0.4);}
+.comp-rank{
+  position:absolute;top:1.5rem;right:1.5rem;
+  width:48px;height:48px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;
+}
+.rank-1st{background:rgba(245,197,24,0.12);border:2px solid var(--gold);}
+.rank-2nd{background:rgba(192,192,192,0.12);border:2px solid #c0c0c0;}
+.comp-org{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text3);margin-bottom:.5rem;}
+.comp-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem;font-weight:600;color:var(--white);
+  margin-bottom:.3rem;line-height:1.3;
+}
+.comp-prize{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:rgba(245,197,24,0.1);border:1px solid rgba(245,197,24,0.25);
+  border-radius:50px;padding:.3rem .8rem;
+  font-size:.78rem;font-weight:600;color:var(--gold);
+  margin:1rem 0;
+}
+.comp-bullets{list-style:none;margin-top:.5rem;}
+.comp-bullets li{
+  position:relative;padding-left:1rem;
+  color:var(--text2);font-size:.85rem;line-height:1.7;margin-bottom:.3rem;
+}
+.comp-bullets li::before{content:'·';position:absolute;left:0;color:var(--indigo);font-size:1.2rem;top:-.15rem;}
+
+/* ─── LEADERSHIP ─── */
+.por-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:2rem;}
+.por-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:2rem;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .5s,transform .5s,border-color .3s;
+}
+.por-card.visible{opacity:1;transform:none;}
+.por-card:hover{border-color:var(--border2);}
+.por-org{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--cyan);}
+.por-role{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.3rem;font-weight:600;color:var(--white);margin:.3rem 0;
+}
+.por-period{font-size:.78rem;color:var(--text3);margin-bottom:1.2rem;}
+.por-highlights{list-style:none;}
+.por-highlights li{
+  position:relative;padding-left:1.2rem;
+  color:var(--text2);font-size:.85rem;line-height:1.7;margin-bottom:.4rem;
+}
+.por-highlights li::before{content:'→';position:absolute;left:0;color:var(--cyan);font-size:.75rem;top:.15rem;}
+.por-impact{
+  margin-top:1rem;padding-top:1rem;
+  border-top:1px solid var(--border);
+  font-size:.82rem;color:var(--indigo);font-weight:500;
+}
+
+/* ─── CONTACT ─── */
+#contact{background:var(--bg2);}
+.contact-wrap{
+  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;
+}
+.contact-left h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.5rem;font-weight:700;color:var(--white);
+  margin-bottom:1rem;
+}
+.contact-left p{color:var(--text2);line-height:1.8;margin-bottom:2rem;}
+.contact-items{display:flex;flex-direction:column;gap:1rem;}
+.contact-item{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem;background:var(--card);
+  border:1px solid var(--border);border-radius:12px;
+  text-decoration:none;transition:all .2s;
+}
+.contact-item:hover{border-color:var(--border2);transform:translateX(4px);}
+.contact-item-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:rgba(99,102,241,0.12);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--indigo);font-size:.95rem;flex-shrink:0;
+}
+.contact-item-text .label{font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.06em;}
+.contact-item-text .value{font-size:.9rem;color:var(--white);font-weight:500;}
+.contact-right{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:2.5rem;
+}
+.form-group{margin-bottom:1.2rem;}
+.form-group label{font-size:.8rem;color:var(--text2);margin-bottom:.4rem;display:block;font-weight:500;}
+.form-group input,
+.form-group textarea{
+  width:100%;background:var(--bg3);
+  border:1px solid var(--border);border-radius:10px;
+  padding:.75rem 1rem;color:var(--text);font-family:'DM Sans',sans-serif;
+  font-size:.9rem;outline:none;transition:border-color .2s;
+  resize:none;
+}
+.form-group input:focus,
+.form-group textarea:focus{border-color:var(--indigo);}
+.form-submit{
+  width:100%;background:var(--grad);color:#fff;
+  border:none;border-radius:50px;padding:.85rem;
+  font-size:.9rem;font-weight:600;cursor:pointer;
+  transition:opacity .2s,transform .2s;
+  font-family:'DM Sans',sans-serif;
+}
+.form-submit:hover{opacity:.85;transform:translateY(-2px);}
+
+/* ─── FOOTER ─── */
+footer{
+  text-align:center;padding:2rem;
+  border-top:1px solid var(--border);
+  color:var(--text3);font-size:.82rem;
+}
+footer span{color:var(--indigo);}
+
+/* ─── SCROLL ANIMATION ─── */
+.reveal{
+  opacity:0;transform:translateY(30px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+.reveal.visible{opacity:1;transform:none;}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--indigo);border-radius:3px;}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  nav{padding:1rem 2rem;}
+  nav.scrolled{padding:.8rem 2rem;}
+  .nav-links{display:none;}
+  .nav-mobile-btn{display:block;}
+  section{padding:5rem 2rem;}
+  .separator{margin:0 2rem;}
+  #hero{padding:6rem 2rem 4rem;}
+  .hero-inner{grid-template-columns:1fr;text-align:center;}
+  .hero-photo-wrap{width:240px;height:280px;margin:0 auto;}
+  .hero-stat-badges{position:static;flex-direction:row;transform:none;justify-content:center;margin-top:2rem;}
+  .hero-desc,.hero-ctas,.hero-socials{justify-content:center;}
+  .about-grid{grid-template-columns:1fr;}
+  .contact-wrap{grid-template-columns:1fr;}
+  .skills-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  .projects-grid{grid-template-columns:1fr;}
+  .skills-grid{grid-template-columns:1fr;}
+  .comp-grid{grid-template-columns:1fr;}
+  .por-grid{grid-template-columns:1fr;}
+  .hero-inner{order:2;}
+}
+
+/* ─── MOBILE NAV MENU ─── */
+.mobile-menu{
+  position:fixed;inset:0;z-index:999;
+  background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2.5rem;
+  transform:translateX(100%);transition:transform .4s;
+}
+.mobile-menu.open{transform:none;}
+.mobile-menu a{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.5rem;font-weight:700;color:var(--white);
+  text-decoration:none;transition:color .2s;
+}
+.mobile-menu a:hover{color:var(--indigo);}
+.mobile-close{
+  position:absolute;top:1.5rem;right:2rem;
+  background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer;
+}
+
+/* ─── ACHIEVEMENTS STRIP ─── */
+.achievements-strip{
+  display:flex;justify-content:center;flex-wrap:wrap;gap:2rem;
+  margin-bottom:4rem;
+}
+.ach-pill{
+  display:flex;align-items:center;gap:.8rem;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:.9rem 1.4rem;
+  transition:border-color .3s;
+}
+.ach-pill:hover{border-color:var(--border2);}
+.ach-pill-icon{
+  width:36px;height:36px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;font-size:.9rem;
+}
+.ach-pill-icon.gold{background:rgba(245,197,24,0.12);color:var(--gold);}
+.ach-pill-icon.silver{background:rgba(192,192,192,0.1);color:#c0c0c0;}
+.ach-pill-icon.blue{background:rgba(99,102,241,0.12);color:var(--indigo);}
+.ach-pill-text .ach-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;font-weight:700;color:var(--white);
+  line-height:1;
+}
+.ach-pill-text .ach-desc{font-size:.72rem;color:var(--text3);font-weight:500;}
+
+/* Loading screen */
+.loader{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity .6s,visibility .6s;
+}
+.loader.done{opacity:0;visibility:hidden;}
+.loader-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3rem;font-weight:700;
+  background:var(--grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:fadeInUp .6s ease forwards;
+}
+.loader-bar{
+  width:200px;height:2px;background:var(--border);
+  border-radius:1px;margin-top:1.5rem;overflow:hidden;
+}
+.loader-progress{
+  height:100%;background:var(--grad);
+  width:0;animation:loadProgress 1.2s ease forwards;
+}
+@keyframes loadProgress{to{width:100%;}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-logo">BG</div>
+  <div class="loader-bar"><div class="loader-progress"></div></div>
+</div>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose"><i class="fa fa-times"></i></button>
+  <a href="#hero" onclick="closeMobileMenu()">Home</a>
+  <a href="#about" onclick="closeMobileMenu()">About</a>
+  <a href="#experience" onclick="closeMobileMenu()">Experience</a>
+  <a href="#projects" onclick="closeMobileMenu()">Projects</a>
+  <a href="#competitions" onclick="closeMobileMenu()">Awards</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Bhavishya Gupta</div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#competitions">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="Bhavishya_Gupta_Resume.pdf" class="nav-cta" download>Download CV</a>
+  <button class="nav-mobile-btn" id="mobileBtn"><i class="fa fa-bars" style="font-size:1.3rem"></i></button>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner container">
+    <div class="hero-text">
+      <div class="hero-badge"><div class="dot"></div>Available for Opportunities</div>
+      <div class="hero-greeting">Hello, I'm</div>
+      <h1 class="hero-name">Bhavishya<br><span>Gupta</span></h1>
+      <div class="hero-typed-wrapper">
+        <span class="typed" id="typedText"></span><span class="cursor-blink"></span>
+      </div>
+      <p class="hero-desc">
+        Final Year B.Tech student at <strong style="color:var(--white)">IIT Kanpur</strong> majoring in Chemical Engineering with a Minor in Industrial & Management Engineering. Passionate about bridging data science, AI, and process engineering.
+      </p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-primary"><i class="fas fa-folder-open" style="margin-right:.5rem"></i>View Projects</a>
+        <a href="#contact" class="btn-outline"><i class="fas fa-envelope" style="margin-right:.5rem"></i>Get In Touch</a>
+      </div>
+      <div class="hero-socials">
+        <a href="mailto:bhavishyagupta1503@gmail.com" class="social-btn" title="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/bhavishya-gupta-998855280/" class="social-btn" title="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/Bhavishya-Gupta" class="social-btn" title="GitHub" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="tel:+919927058942" class="social-btn" title="Phone"><i class="fas fa-phone"></i></a>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div class="hero-photo-wrap">
+        <div class="hero-photo-ring"></div>
+        <div class="hero-photo-border"></div>
+        <div class="hero-photo">
+          <img src="Linkedin_Profile_Photo.jpg" alt="Bhavishya Gupta" onerror="this.style.display='none'"/>
+          BG
+        </div>
+      </div>
+      <div class="hero-stat-badges">
+        <div class="stat-badge"><div class="stat-num">8.23</div><div class="stat-lbl">CPI/10</div></div>
+        <div class="stat-badge"><div class="stat-num">AIR<br>4428</div><div class="stat-lbl">JEE Adv.</div></div>
+        <div class="stat-badge"><div class="stat-num">20+</div><div class="stat-lbl">Projects</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="separator"></div>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="container">
+    <div class="section-tag"><span class="line"></span>About Me</div>
+    <h2 class="section-title">Bridging <em>Engineering</em><br>& Intelligence</h2>
+    <div class="about-grid">
+      <div class="about-img-wrap reveal">
+        <div class="about-img">
+          <img src="photo.jpg" alt="Bhavishya" onerror="this.style.display='none'; this.parentElement.innerHTML+='<i class=\'fas fa-user\' style=\'font-size:5rem;color:var(--text3)\'></i>'"/>
+          <div class="about-img-overlay"></div>
+        </div>
+        <div class="about-edu-card">
+          <div class="edu-inst">IIT Kanpur</div>
+          <div class="edu-cpi">8.13</div>
+          <div class="edu-sub">CPI out of 10</div>
+        </div>
+      </div>
+      <div class="about-content reveal">
+        <h3>Chemical Engineer who thinks in Data & Builds with Code</h3>
+        <p>
+          I'm a final year B.Tech student at IIT Kanpur, where I pursue Chemical Engineering with a Minor in Industrial & Management Engineering. My work spans three worlds — <strong style="color:var(--indigo)">process engineering</strong>, <strong style="color:var(--cyan)">machine learning</strong>, and <strong style="color:var(--gold)">product management</strong>.
+        </p>
+        <p>
+          From synthesizing catalysts in the lab to building multimodal ML pipelines, from optimizing industrial processes in Aspen Plus to designing product roadmaps for Zomato — I love solving hard, real-world problems at the intersection of disciplines.
+        </p>
+        <p>
+          I've won national competitions, mentored 150+ students, interned at ICICI Bank, and built ML projects with strong real-world outcomes. I'm driven by curiosity, rigor, and impact.
+        </p>
+        <div class="about-facts">
+          <div class="fact-item">
+            <div><i class="fas fa-graduation-cap"></i></div>
+            <div class="fact-label">Degree</div>
+            <div class="fact-value">B.Tech, Chemical Engineering</div>
+          </div>
+          <div class="fact-item">
+            <div><i class="fas fa-map-marker-alt"></i></div>
+            <div class="fact-label">Location</div>
+            <div class="fact-value">IIT Kanpur, India</div>
+          </div>
+          <div class="fact-item">
+            <div><i class="fas fa-star"></i></div>
+            <div class="fact-label">JEE Advanced AIR</div>
+            <div class="fact-value">4428 / 1.55 Lakh</div>
+          </div>
+          <div class="fact-item">
+            <div><i class="fas fa-users"></i></div>
+            <div class="fact-label">Students Mentored</div>
+            <div class="fact-value">150+ across IITs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Education Timeline -->
+<section id="education" style="padding-top:0;">
+  <div class="container">
+    <div class="section-tag"><span class="line"></span>Education</div>
+    <h2 class="section-title">Academic <em>Foundation</em></h2>
+    <div class="edu-timeline">
+      <div class="edu-item">
+        <div class="edu-dot"><i class="fas fa-university"></i></div>
+        <div class="edu-content">
+          <div class="edu-year">2022 – 2026</div>
+          <div class="edu-degree">B.Tech, Chemical Engineering + Minor in IME</div>
+          <div class="edu-inst-name">Indian Institute of Technology Kanpur</div>
+          <span class="edu-score">CPI: 8.13 / 10</span>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-dot"><i class="fas fa-school"></i></div>
+        <div class="edu-content">
+          <div class="edu-year">2021</div>
+          <div class="edu-degree">CBSE Class XII (Science)</div>
+          <div class="edu-inst-name">St. Mary's Convent School, Gajraula</div>
+          <span class="edu-score">96.4%</span>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-dot"><i class="fas fa-book"></i></div>
+        <div class="edu-content">
+          <div class="edu-year">2019</div>
+          <div class="edu-degree">CBSE Class X</div>
+          <div class="edu-inst-name">St. Mary's Convent School, Gajraula</div>
+          <span class="edu-score">96.0%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="separator"></div>
+
+<!-- ═══ EXPERIENCE ═══ -->
+<section id="experience">
+  <div class="container">
+    <div class="section-tag"><span class="line"></span>Work Experience</div>
+    <h2 class="section-title">Professional <em>Journey</em></h2>
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-company">ICICI Bank</div>
+          <div class="exp-role">Data Governance & Privacy Intern</div>
+          <div class="exp-mentor">Mentor: Sweta Chatterjee</div>
+        </div>
+        <div class="exp-period">May '25 – Jul '25</div>
+      </div>
+      <div class="exp-section">
+        <div class="exp-section-title">Objective</div>
+        <p style="color:var(--text2);font-size:.88rem;line-height:1.7">Assessed GDPR adherence and derived best practices to align ICICI's consent and data governance with India's Digital Personal Data Protection Act (DPDPA).</p>
+      </div>
+      <div class="exp-section">
+        <div class="exp-section-title">Key Contributions</div>
+        <ul class="exp-bullets">
+          <li>Built GDPR–DPDP comparative matrices across consent, rights, breach response, penalties, DPO/DPIA requirements, and cross-border transfer frameworks to guide fintech compliance controls.</li>
+          <li>Mapped consent touchpoints and data flows across ICICI products: account opening, iMobile, credit cards, loans (personal/home/education), Aadhaar e-KYC, and CIBIL — flagged bundled and irrevocable terms.</li>
+          <li>Translated enforcement case studies (Amazon, Meta, LinkedIn, TikTok, Google, Uber, Criteo; Aadhaar, CoWIN) into actionable compliance mitigations for profiling, children's data, and cross-border transfers.</li>
+          <li>Proposed granular opt-ins, consent dashboard with withdrawal/logging/audit trails, parental age-gating, data minimization, fixed retention policies, cookie banners, DPIA cadence, and cross-border safeguards.</li>
+        </ul>
+      </div>
+      <div class="exp-section">
+        <div class="exp-section-title">Impact</div>
+        <ul class="exp-bullets">
+          <li>Delivered an executive-ready report adopted for internal review of consent practices across digital and branch channels.</li>
+          <li>Created a roadmap to cut DPDP risk, boost auditability for SDF, improve language transparency, and build stakeholder trust.</li>
+        </ul>
+      </div>
+      <div class="exp-tags">
+        <span class="exp-tag">GDPR</span>
+        <span class="exp-tag">DPDPA</span>
+        <span class="exp-tag">Data Governance</span>
+        <span class="exp-tag">Privacy Compliance</span>
+        <span class="exp-tag">FinTech</span>
+        <span class="exp-tag">DPIA</span>
+        <span class="exp-tag">Consent Management</span>
+      </div>
+    </div>
+
+    <!-- Growth Internship -->
+    <div class="exp-card" style="transition-delay:.1s">
+      <div class="exp-header">
+        <div>
+          <div class="exp-company">FACT APP</div>
+          <div class="exp-role">Growth Intern</div>
+        </div>
+        <div class="exp-period">Summer 2023</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Focused on marketing strategy, mentoring, and professional network building during a 1-month growth internship.</li>
+        <li>Contributed to user acquisition and engagement initiatives for the platform.</li>
+      </ul>
+      <div class="exp-tags">
+        <span class="exp-tag">Marketing</span>
+        <span class="exp-tag">Growth Strategy</span>
+        <span class="exp-tag">Networking</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="separator"></div>
+
+<!-- ═══ SKILLS ═══ -->
+<section id="skills">
+  <div class="container">
+    <div class="section-tag"><span class="line"></span>Technical Arsenal</div>
+    <h2 class="section-title">Skills & <em>Expertise</em></h2>
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <div class="skill-cat-icon"><i class="fas fa-code"></i></div>
+        <div class="skill-cat-name">Programming Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span><span class="skill-tag">C++</span><span class="skill-tag">C</span>
+          <span class="skill-tag">MATLAB</span><span class="skill-tag">R</span><span class="skill-tag">SQL</span>
+          <span class="skill-tag">Scala</span><span class="skill-tag">PHP</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-icon"><i class="fas fa-brain"></i></div>
+        <div class="skill-cat-name">ML / Deep Learning</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PyTorch</span><span class="skill-tag">TensorFlow</span><span class="skill-tag">Keras</span>
+          <span class="skill-tag">Scikit-learn</span><span class="skill-tag">XGBoost</span><span class="skill-tag">LightGBM</span>
+          <span class="skill-tag">CatBoost</span><span class="skill-tag">Hugging Face</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-icon"><i class="fas fa-database"></i></div>
+        <div class="skill-cat-name">Data Engineering</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Apache Spark</span><span class="skill-tag">PySpark</span><span class="skill-tag">Kafka</span>
+          <span class="skill-tag">Airflow</span><span class="skill-tag">Flink</span><span class="skill-tag">dbt</span>
+          <span class="skill-tag">Snowflake</span><span class="skill-tag">BigQuery</span><span class="skill-tag">Hadoop</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-icon"><i class="fas fa-flask"></i></div>
+        <div class="skill-cat-name">ML Frameworks & Libraries</div>
+        <div class="skill-tags">
+          <span class="skill-tag">LangChain</span><span class="skill-tag">LangGraph</span><span class="skill-tag">LlamaIndex</span>
+          <span class="skill-tag">OpenCV</span><span class="skill-tag">NLTK</span><span class="skill-tag">spaCy</span>
+          <span class="skill-tag">Pandas</span><span class="skill-tag">NumPy</span><span class="skill-tag">Statsmodels</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-icon"><i class="fas fa-industry"></i></div>
+        <div class="skill-cat-name">Process Engineering Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Aspen Plus</span><span class="skill-tag">COMSOL</span><span class="skill-tag">AutoCAD</span>
+          <span class="skill-tag">Wolfram Mathematica</span><span class="skill-tag">Origin</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-icon"><i class="fas fa-cloud"></i></div>
+        <div class="skill-cat-name">Cloud & DevOps</div>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS (EC2/S3/Lambda)</span><span class="skill-tag">GCP</span><span class="skill-tag">Azure</span>
+          <span class="skill-tag">Docker</span><span class="skill-tag">Kubernetes</span><span class="skill-tag">MLflow</span>
+          <span class="skill-tag">Databricks</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-icon"><i class="fas fa-chart-bar"></i></div>
+        <div class="skill-cat-name">Analytics & Visualization</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Tableau</span><span class="skill-tag">Power BI</span><span class="skill-tag">Looker</span>
+          <span class="skill-tag">Plotly</span><span class="skill-tag">Matplotlib</span><span class="skill-tag">Seaborn</span>
+          <span class="skill-tag">Google Analytics</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-icon"><i class="fas fa-box"></i></div>
+        <div class="skill-cat-name">Product & Collaboration</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Figma</span><span class="skill-tag">Jira</span><span class="skill-tag">Notion</span>
+          <span class="skill-tag">Asana</span><span class="skill-tag">Miro</span><span class="skill-tag">Amplitude</span>
+          <span class="skill-tag">Mixpanel</span><span class="skill-tag">Optimizely</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="separator"></div>
+
+<!-- ═══ PROJECTS ═══ -->
+<section id="projects">
+  <div class="container">
+    <div class="section-tag"><span class="line"></span>Projects</div>
+    <h2 class="section-title">Selected <em>Works</em></h2>
+    <div class="projects-filter">
+      <button class="filter-btn active" data-filter="all">All Projects</button>
+      <button class="filter-btn" data-filter="ml">AI / ML</button>
+      <button class="filter-btn" data-filter="chem">Chemical Eng.</button>
+      <button class="filter-btn" data-filter="pm">Product</button>
+      <button class="filter-btn" data-filter="data">Data Science</button>
+    </div>
+    <div class="projects-grid" id="projectsGrid">
+
+      <!-- Project 1 -->
+      <div class="project-card" data-category="ml" onclick="openModal('modal-crowd')">
+        <div class="project-card-top">
+          <div class="project-overlay-grad"></div>
+          <i class="fas fa-people-arrows project-card-icon"></i>
+        </div>
+        <div class="project-card-body">
+          <span class="project-cat-badge badge-ml">AI / ML</span>
+          <div class="project-title">Crowd Dynamics Simulation</div>
+          <div class="project-desc">Developed crowd simulation models using YOLOv8n (92% accuracy) + Ensemble Kalman Smoothing. Implemented Steering, Social Force, and Predictive Planning models.</div>
+          <div class="project-outcome"><i class="fas fa-bolt"></i>15% improvement in tracking accuracy via EnKS</div>
+          <div class="project-footer">
+            <span class="project-mentor">Mentor: Prof. Shankar Prawesh</span>
+            <div class="project-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card" data-category="chem" onclick="openModal('modal-hds')">
+        <div class="project-card-top">
+          <div class="project-overlay-grad" style="background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(99,102,241,0.05))"></div>
+          <i class="fas fa-atom project-card-icon" style="color:rgba(34,211,238,0.3)"></i>
+        </div>
+        <div class="project-card-body">
+          <span class="project-cat-badge badge-chem">Chemical Eng.</span>
+          <div class="project-title">HDS Catalyst Synthesis</div>
+          <div class="project-desc">Synthesized Ni–Mo catalysts on am-Al₂O₃ + silica supports (MCM-41, SBA-15, KIT-6) for hydrodesulfurization. Automated stoichiometry via MATLAB.</div>
+          <div class="project-outcome"><i class="fas fa-bolt"></i>7 catalyst batches; 5 compositions (15–50% loading)</div>
+          <div class="project-footer">
+            <span class="project-mentor">UGP | Prof. Sri Sivakumar</span>
+            <div class="project-arrow" style="color:var(--cyan)"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card" data-category="pm" onclick="openModal('modal-zomato')">
+        <div class="project-card-top">
+          <div class="project-overlay-grad" style="background:linear-gradient(135deg,rgba(245,197,24,0.08),rgba(244,114,182,0.05))"></div>
+          <i class="fas fa-layer-group project-card-icon" style="color:rgba(245,197,24,0.3)"></i>
+        </div>
+        <div class="project-card-body">
+          <span class="project-cat-badge badge-pm">Product</span>
+          <div class="project-title">Zomato Unified Platform Strategy</div>
+          <div class="project-desc">Led product strategy to address cross-platform fragmentation at Zomato. Designed AI-powered cross-selling, unified loyalty, and super-app roadmap.</div>
+          <div class="project-outcome"><i class="fas fa-bolt"></i>Projected INR 840 crore additional annual revenue</div>
+          <div class="project-footer">
+            <span class="project-mentor">Capstone | AcceleratorX, IIT Kanpur</span>
+            <div class="project-arrow" style="color:var(--gold)"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="project-card" data-category="chem" onclick="openModal('modal-ethylbenz')">
+        <div class="project-card-top">
+          <div class="project-overlay-grad" style="background:linear-gradient(135deg,rgba(34,211,238,0.1),rgba(99,102,241,0.04))"></div>
+          <i class="fas fa-cogs project-card-icon" style="color:rgba(34,211,238,0.3)"></i>
+        </div>
+        <div class="project-card-body">
+          <span class="project-cat-badge badge-chem">Chemical Eng.</span>
+          <div class="project-title">Ethyl Benzene Process Optimization</div>
+          <div class="project-desc">Optimized industrial EB production using MATLAB fmincon + Aspen Plus. Implemented dual-loop PID control for 2 CSTRs and heat-integrated 3-column distillation network.</div>
+          <div class="project-outcome"><i class="fas fa-bolt"></i>47.6% TAC reduction: $3.29M → $1.72M</div>
+          <div class="project-footer">
+            <span class="project-mentor">CHE352 | Prof. Nitin Kaistha</span>
+            <div class="project-arrow" style="color:var(--cyan)"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 5 -->
+      <div class="project-card" data-category="ml" onclick="openModal('modal-fraud')">
+        <div class="project-card-top">
+          <div class="project-overlay-grad"></div>
+          <i class="fas fa-shield-alt project-card-icon"></i>
+        </div>
+        <div class="project-card-body">
+          <span class="project-cat-badge badge-ml">AI / ML</span>
+          <div class="project-title">Credit Card Fraud Detection</div>
+          <div class="project-desc">Developed anomaly detection system on highly imbalanced credit card transaction dataset. Compared Isolation Forest, LOF, and SVM algorithms with precision-recall analysis.</div>
+          <div class="project-outcome"><i class="fas fa-bolt"></i>99.74% detection accuracy with Isolation Forest</div>
+          <div class="project-footer">
+            <span class="project-mentor">Self Project</span>
+            <div class="project-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 6 -->
+      <div class="project-card" data-category="ml" onclick="openModal('modal-multimodal')">
+        <div class="project-card-top">
+          <div class="project-overlay-grad"></div>
+          <i class="fas fa-video project-card-icon"></i>
+        </div>
+        <div class="project-card-body">
+          <span class="project-cat-badge badge-ml">AI / ML</span>
+          <div class="project-title">Multi-Modal Video Interview Analytics</div>
+          <div class="project-desc">End-to-end pipeline transforming candidate videos into decision-ready insights via emotion, gaze, transcript sentiment, and metadata analysis.</div>
+          <div class="project-outcome"><i class="fas fa-bolt"></i>Delivered hire/consider decisions for 9 candidates</div>
+          <div class="project-footer">
+            <span class="project-mentor">Self Project</span>
+            <div class="project-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 7 -->
+      <div class="project-card" data-category="ml" onclick="openModal('modal-lowdata')">
+        <div class="project-card-top">
+          <div class="project-overlay-grad"></div>
+          <i class="fas fa-network-wired project-card-icon"></i>
+        </div>
+        <div class="project-card-body">
+          <span class="project-cat-badge badge-ml">AI / ML</span>
+          <div class="project-title">Low-Data Multimodal Classification</div>
+          <div class="project-desc">Built low-data pipeline for binary prediction from emoticons, deep embeddings, and digit strings. Benchmarked LSTM, SVM, Random Forest, XGBoost, CatBoost with 20–100% training splits.</div>
+          <div class="project-outcome"><i class="fas fa-bolt"></i>98.8% validation accuracy (single-modality)</div>
+          <div class="project-footer">
+            <span class="project-mentor">CS771 | Prof. Piyush Rai</span>
+            <div class="project-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 8 -->
+      <div class="project-card" data-category="data" onclick="openModal('modal-education')">
+        <div class="project-card-top">
+          <div class="project-overlay-grad" style="background:linear-gradient(135deg,rgba(244,114,182,0.08),rgba(99,102,241,0.05))"></div>
+          <i class="fas fa-chart-line project-card-icon" style="color:rgba(244,114,182,0.3)"></i>
+        </div>
+        <div class="project-card-body">
+          <span class="project-cat-badge badge-data">Data Science</span>
+          <div class="project-title">Educational Outcome Trends in India</div>
+          <div class="project-desc">Analyzed 1,400+ records across 14 variables (2017–2021). Applied PCA + Factor Analysis (84% variance), MANOVA/ANOVA for regional differences.</div>
+          <div class="project-outcome"><i class="fas fa-bolt"></i>Significant performance shifts (p &lt; 0.001)</div>
+          <div class="project-footer">
+            <span class="project-mentor">DMS692 | Prof. Nivedita Bhaktha</span>
+            <div class="project-arrow" style="color:var(--pink)"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 9 -->
+      <div class="project-card" data-category="data" onclick="openModal('modal-bayesian')">
+        <div class="project-card-top">
+          <div class="project-overlay-grad" style="background:linear-gradient(135deg,rgba(244,114,182,0.08),rgba(99,102,241,0.04))"></div>
+          <i class="fas fa-chart-area project-card-icon" style="color:rgba(244,114,182,0.3)"></i>
+        </div>
+        <div class="project-card-body">
+          <span class="project-cat-badge badge-data">Data Science</span>
+          <div class="project-title">Bayesian Analysis & Inference</div>
+          <div class="project-desc">Mastered Bayesian statistics and applied hierarchical models using PyMC and ArviZ. Implemented probabilistic programming for Linear Regression and Regression Trees.</div>
+          <div class="project-outcome"><i class="fas fa-bolt"></i>Advanced statistical decision-making via PyMC</div>
+          <div class="project-footer">
+            <span class="project-mentor">Stamatics, IIT Kanpur</span>
+            <div class="project-arrow" style="color:var(--pink)"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 10 -->
+      <div class="project-card" data-category="chem" onclick="openModal('modal-candle')">
+        <div class="project-card-top">
+          <div class="project-overlay-grad" style="background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(245,197,24,0.04))"></div>
+          <i class="fas fa-fire project-card-icon" style="color:rgba(34,211,238,0.3)"></i>
+        </div>
+        <div class="project-card-body">
+          <span class="project-cat-badge badge-chem">Chemical Eng.</span>
+          <div class="project-title">Candle Dynamics & Combustion</div>
+          <div class="project-desc">Modeled candle combustion via 10,000-run Monte Carlo simulations. Implemented feedforward neural network in Keras for mass regression mapping.</div>
+          <div class="project-outcome"><i class="fas fa-bolt"></i>Zero-order reaction confirmed with R² = 0.9998</div>
+          <div class="project-footer">
+            <span class="project-mentor">CHE331 | Prof. Raj Ganesh S. Pala</span>
+            <div class="project-arrow" style="color:var(--cyan)"><i class="fas fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="separator"></div>
+
+<!-- ═══ COMPETITIONS ═══ -->
+<section id="competitions">
+  <div class="container">
+    <div class="section-tag"><span class="line"></span>Competitions & Awards</div>
+    <h2 class="section-title">National <em>Achievements</em></h2>
+
+    <div class="achievements-strip reveal">
+      <div class="ach-pill">
+        <div class="ach-pill-icon gold"><i class="fas fa-trophy"></i></div>
+        <div class="ach-pill-text">
+          <div class="ach-num">🥇 1st Place</div>
+          <div class="ach-desc">Evonik Sustainability Challenge</div>
+        </div>
+      </div>
+      <div class="ach-pill">
+        <div class="ach-pill-icon silver"><i class="fas fa-medal"></i></div>
+        <div class="ach-pill-text">
+          <div class="ach-num">🥈 2nd Place</div>
+          <div class="ach-desc">Kanopy Optimization Challenge</div>
+        </div>
+      </div>
+      <div class="ach-pill">
+        <div class="ach-pill-icon gold"><i class="fas fa-rupee-sign"></i></div>
+        <div class="ach-pill-text">
+          <div class="ach-num">₹1.6 Lakh</div>
+          <div class="ach-desc">Total Prize Money Won</div>
+        </div>
+      </div>
+      <div class="ach-pill">
+        <div class="ach-pill-icon blue"><i class="fas fa-star"></i></div>
+        <div class="ach-pill-text">
+          <div class="ach-num">AIR 4428</div>
+          <div class="ach-desc">JEE Advanced 2022</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="comp-grid">
+      <div class="comp-card">
+        <div class="comp-rank rank-1st">🥇</div>
+        <div class="comp-org">Evonik × IIT Kanpur</div>
+        <div class="comp-name">Evonik Sustainability Challenge 2025</div>
+        <div class="comp-prize"><i class="fas fa-trophy"></i>1st Place Nationally · INR 1.5 Lakh</div>
+        <ul class="comp-bullets">
+          <li>Designed end-to-end plant for 30,000 TPA BHET production using Aspen Plus with complete process flows, mass and energy balances.</li>
+          <li>Assessed operating conditions, utilities, and process alternatives ensuring economic viability while maintaining sustainability goals.</li>
+          <li>Documented design trade-offs (capacity, operating window, costs) demonstrating feasibility to the judging panel.</li>
+        </ul>
+      </div>
+      <div class="comp-card">
+        <div class="comp-rank rank-2nd">🥈</div>
+        <div class="comp-org">Kanopy Techno Solutions × Chemineers</div>
+        <div class="comp-name">Optimization Exergy – EXERGY Fest 2025</div>
+        <div class="comp-prize"><i class="fas fa-medal"></i>2nd Place · INR 10,000</div>
+        <ul class="comp-bullets">
+          <li>Formulated EIS modeling as a combinatorial search over equivalent circuit topologies and parameter sets.</li>
+          <li>Developed Greedy and Dynamic Programming approaches to identify optimal circuit combinations balancing model fit and efficiency.</li>
+          <li>Achieved consistently high-quality solutions on contest instances within time limits — participated against IIT/NIT teams.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="separator"></div>
+
+<!-- ═══ LEADERSHIP ═══ -->
+<section id="leadership">
+  <div class="container">
+    <div class="section-tag"><span class="line"></span>Leadership</div>
+    <h2 class="section-title">Positions of <em>Responsibility</em></h2>
+    <div class="por-grid">
+      <div class="por-card">
+        <div class="por-org">Chemineers Society, IIT Kanpur</div>
+        <div class="por-role">Mentor – SimuTech</div>
+        <div class="por-period">May '24 – Apr '25</div>
+        <ul class="por-highlights">
+          <li>Spearheaded planning for all SimuTech activities + hosted key event ChemWiz at EXERGY fest.</li>
+          <li>Initiated the "Know Your Department" series to enhance departmental understanding.</li>
+          <li>Designed the "Kanpur Heatwave" creative canvas competition, engaging UG23 batch.</li>
+          <li>Mentored 2 major projects guiding <strong style="color:var(--white)">150+ undergraduates</strong> across ML and Heat Transfer.</li>
+        </ul>
+        <div class="por-impact">Impact: 150+ students mentored across IIT Kanpur and colleges.</div>
+      </div>
+      <div class="por-card">
+        <div class="por-org">Google Developer Groups (GDG), IIT Kanpur</div>
+        <div class="por-role">Core Team Member</div>
+        <div class="por-period">Jul '24 – Apr '25</div>
+        <ul class="por-highlights">
+          <li>Partnered with <strong style="color:var(--white)">30+ companies</strong>, boosting club growth by 40% and cutting inefficiencies by 50%.</li>
+          <li>Drove <strong style="color:var(--white)">300+ attendees</strong> to inaugural events; boosted student competition involvement by 50%.</li>
+          <li>Mentored winter project for 15+ UGs in Active Learning (Deep Learning + uncertainty metrics).</li>
+          <li>Enhanced sponsorship strategy, growing support by 70%; grew social media followers 5-fold.</li>
+        </ul>
+        <div class="por-impact">Impact: 40% club growth · 5x social reach · 70% sponsorship increase</div>
+      </div>
+      <div class="por-card">
+        <div class="por-org">IIT Kanpur</div>
+        <div class="por-role">Senior Mentor – Internship Season</div>
+        <div class="por-period">2025</div>
+        <ul class="por-highlights">
+          <li>Mentored 7 junior undergraduates, providing comprehensive guidance and resources.</li>
+          <li>Enabled mentees to excel in their internship season through mock interviews and resume reviews.</li>
+        </ul>
+        <div class="por-impact">Impact: 7 juniors guided successfully through internship placements</div>
+      </div>
+      <div class="por-card">
+        <div class="por-org">NSS, IIT Kanpur</div>
+        <div class="por-role">Social Initiatives</div>
+        <div class="por-period">2022 – 2023</div>
+        <ul class="por-highlights">
+          <li>Promoted health camps and educated communities about ABHA cards across multiple villages.</li>
+          <li>Spearheaded a tree plantation drive significantly enhancing campus environmental sustainability.</li>
+          <li>Developed content and produced videos for blood donation camp organized by Raktarpan × NSS.</li>
+        </ul>
+        <div class="por-impact">Impact: Community health awareness across multiple villages</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="separator"></div>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="container">
+    <div class="section-tag"><span class="line"></span>Get in Touch</div>
+    <h2 class="section-title">Let's <em>Connect</em></h2>
+    <div class="contact-wrap">
+      <div class="contact-left reveal">
+        <h3>Open to Opportunities</h3>
+        <p>Whether it's a full-time role, research collaboration, internship, or just a great conversation — I'd love to hear from you. I'm especially interested in Data Science, ML Engineering, Product Management, and Chemical Process Engineering roles.</p>
+        <div class="contact-items">
+          <a class="contact-item" href="mailto:bhavishyagupta1503@gmail.com">
+            <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+            <div class="contact-item-text">
+              <div class="label">Email</div>
+              <div class="value">bhavishyagupta1503@gmail.com</div>
+            </div>
+          </a>
+          <a class="contact-item" href="tel:+919927058942">
+            <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
+            <div class="contact-item-text">
+              <div class="label">Phone</div>
+              <div class="value">+91-9927058942</div>
+            </div>
+          </a>
+          <a class="contact-item" href="https://www.linkedin.com/in/bhavishya-gupta-998855280/" target="_blank">
+            <div class="contact-item-icon"><i class="fab fa-linkedin-in"></i></div>
+            <div class="contact-item-text">
+              <div class="label">LinkedIn</div>
+              <div class="value">Bhavishya Gupta</div>
+            </div>
+          </a>
+          <a class="contact-item" href="https://github.com/Bhavishya-Gupta" target="_blank">
+            <div class="contact-item-icon"><i class="fab fa-github"></i></div>
+            <div class="contact-item-text">
+              <div class="label">GitHub</div>
+              <div class="value">Bhavishya-Gupta</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-right reveal">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="e.g. Jane Doe" id="formName"/>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="jane@example.com" id="formEmail"/>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" placeholder="Opportunity / Collaboration / Hello" id="formSubject"/>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea rows="5" placeholder="Tell me about the opportunity..." id="formMsg"></textarea>
+        </div>
+        <button class="form-submit" onclick="handleFormSubmit()">Send Message <i class="fas fa-paper-plane" style="margin-left:.5rem"></i></button>
+        <div id="formStatus" style="margin-top:.8rem;font-size:.85rem;text-align:center;color:var(--cyan);display:none;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & Built with ❤️ by <span>Bhavishya Gupta</span> · IIT Kanpur · 2025</p>
+</footer>
+
+<!-- ═══ MODALS ═══ -->
+<div class="modal-overlay" id="modal-crowd">
+  <div class="modal">
+    <div class="modal-header">
+      <div><span class="project-cat-badge badge-ml modal-badge">AI / ML | May–Jul 2024</span><div class="modal-title">Statistical Similarity Measure for Aggregate Crowd Dynamics</div><div class="modal-meta">Mentor: Prof. Shankar Prawesh · IIT Kanpur</div></div>
+      <button class="modal-close" onclick="closeModal('modal-crowd')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section-label">Objective</div>
+      <p style="color:var(--text2);font-size:.88rem;line-height:1.7">Develop crowd simulation models to accurately simulate and predict pedestrian dynamics and enhance urban safety.</p>
+      <div class="modal-section-label">Approach</div>
+      <ul class="modal-list">
+        <li>Tracked pedestrian movements across frames using YOLOv8n with 92% detection accuracy; extracted data for simulation.</li>
+        <li>Improved tracking accuracy by 15% using Ensemble Kalman Smoothing (EnKS) to refine pedestrian state distributions.</li>
+        <li>Implemented Steering, Social Force, and Predictive Planning models for realistic pedestrian behavior and collision avoidance.</li>
+        <li>Validated performance with entropy, error mean, and standard deviation metrics; visualized trajectories using OpenCV.</li>
+      </ul>
+      <div class="modal-section-label">Outcome</div>
+      <ul class="modal-list">
+        <li>Optimized simulation for real-time applications, providing insights into crowd dynamics and safety.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-hds">
+  <div class="modal">
+    <div class="modal-header">
+      <div><span class="project-cat-badge badge-chem modal-badge">Chemical Eng. | Jan–Apr 2025</span><div class="modal-title">Ni–Mo Catalyst Synthesis on Silica Supports for HDS</div><div class="modal-meta">UGP | Mentor: Prof. Sri Sivakumar · IIT Kanpur</div></div>
+      <button class="modal-close" onclick="closeModal('modal-hds')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section-label">Objective</div>
+      <p style="color:var(--text2);font-size:.88rem;line-height:1.7">Develop and validate Ni–Mo catalysts supported on amorphous Al₂O₃ blended with different silica supports for hydrodesulfurization of refractory sulfur compounds.</p>
+      <div class="modal-section-label">Approach</div>
+      <ul class="modal-list">
+        <li>Synthesized am-Al₂O₃ via thermal decomposition and prepared silica variants (MCM-41, SBA-15, KIT-6).</li>
+        <li>Prepared 87% am-Al₂O₃ + 13% silica support blends via attrition mixing; performed citric acid-assisted wet impregnation and calcination at 550°C (2°C/min ramp).</li>
+        <li>Standardized lab procedures: pelletization, sieving, centrifugation/acetone washing, sonication; validated reactor loading via vibration filling and helium + soap-bubble leak tests.</li>
+        <li>Automated stoichiometric scaling with MATLAB to compute reagent/support weights for any target catalyst mass and composition.</li>
+      </ul>
+      <div class="modal-section-label">Outcome</div>
+      <ul class="modal-list">
+        <li>Produced 7 reproducible am-Al₂O₃ batches and 5 catalyst compositions (15%, 20%, 30%, 35%, 50% loadings) + 3 silica-variant catalysts at 20% loading.</li>
+        <li>Delivered a reusable MATLAB tool eliminating manual stoichiometric errors and accelerating formulation planning.</li>
+        <li>Established documented, repeatable lab protocols enhancing experimental safety and consistency.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-zomato">
+  <div class="modal">
+    <div class="modal-header">
+      <div><span class="project-cat-badge badge-pm modal-badge">Product | Aug–Sep 2025</span><div class="modal-title">Zomato Unified Platform Integration Strategy</div><div class="modal-meta">Capstone Project | AcceleratorX · Product Club, IIT Kanpur</div></div>
+      <button class="modal-close" onclick="closeModal('modal-zomato')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section-label">Objective</div>
+      <p style="color:var(--text2);font-size:.88rem;line-height:1.7">Led product strategy to address cross-platform fragmentation at Zomato, targeting INR 2,400 crore untapped market through unified super-app integration.</p>
+      <div class="modal-section-label">Approach</div>
+      <ul class="modal-list">
+        <li>Conducted extensive market research identifying that 70% of Zomato's 80M+ customers were unaware of multi-service offerings — resulting in 35% lower LTV for single-platform users.</li>
+        <li>Designed integrated product roadmap with AI-powered cross-selling, unified loyalty system, and seamless multi-service navigation across 3 development phases with specific success gates and KPIs.</li>
+        <li>Built interactive prototype and comprehensive PRD with user personas, feature specifications (MoSCoW framework), and phased rollout strategy across Delhi/Mumbai tier-1 markets.</li>
+      </ul>
+      <div class="modal-section-label">Projected Outcomes</div>
+      <ul class="modal-list">
+        <li>Cross-platform adoption from 22% → 40% within 12 months.</li>
+        <li>25% LTV improvement: INR 2,800 → INR 3,500 per user.</li>
+        <li>25% reduction in customer acquisition costs: INR 180 → INR 135.</li>
+        <li>INR 840 crore additional annual revenue potential.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-ethylbenz">
+  <div class="modal">
+    <div class="modal-header">
+      <div><span class="project-cat-badge badge-chem modal-badge">Chemical Eng. | Jan–Feb 2025</span><div class="modal-title">Ethyl Benzene Process Optimization</div><div class="modal-meta">CHE352 | Prof. Nitin Kaistha · IIT Kanpur</div></div>
+      <button class="modal-close" onclick="closeModal('modal-ethylbenz')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section-label">Approach</div>
+      <ul class="modal-list">
+        <li>Ran static sensitivity screening in Aspen Plus on 4 key parameters; used MATLAB fmincon (6 iterations, 3 variables) for constrained nonlinear optimization.</li>
+        <li>Implemented dual-loop PID control (Ziegler–Nichols, Tyreus–Luyben tuning) for 2 CSTRs and heat-integrated 3-column distillation network.</li>
+        <li>Validated process performance under ±10% feed disturbances ensuring stable operation at 99.9 kmol/h production capacity.</li>
+      </ul>
+      <div class="modal-section-label">Outcome</div>
+      <ul class="modal-list">
+        <li>Achieved 47.6% TAC reduction from $3.29M to $1.72M with 99.9% product purity at industrial scale.</li>
+        <li>Delivered 3-year payback period at industrial scale production capacity.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-fraud">
+  <div class="modal">
+    <div class="modal-header">
+      <div><span class="project-cat-badge badge-ml modal-badge">AI / ML | May–Jun 2024</span><div class="modal-title">Credit Card Fraud Detection</div><div class="modal-meta">Self Project</div></div>
+      <button class="modal-close" onclick="closeModal('modal-fraud')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section-label">Approach</div>
+      <ul class="modal-list">
+        <li>Conducted comprehensive EDA on highly imbalanced credit card transaction dataset, analyzing class distribution and feature correlations.</li>
+        <li>Implemented and compared Isolation Forest, Local Outlier Factor (LOF), and Support Vector Machine algorithms for anomaly detection.</li>
+        <li>Evaluated model performance using accuracy score and classification report focusing on precision, recall, and F1-score.</li>
+      </ul>
+      <div class="modal-section-label">Outcome</div>
+      <ul class="modal-list"><li>Achieved 99.74% detection accuracy with Isolation Forest, significantly outperforming LOF and SVM.</li></ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-multimodal">
+  <div class="modal">
+    <div class="modal-header">
+      <div><span class="project-cat-badge badge-ml modal-badge">AI / ML | Dec 2024 – Jan 2025</span><div class="modal-title">Multi-Modal Video Interview Analytics</div><div class="modal-meta">Self Project</div></div>
+      <button class="modal-close" onclick="closeModal('modal-multimodal')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section-label">Approach</div>
+      <ul class="modal-list">
+        <li>Standardized multi-source analysis across emotion recognition, gaze/eye-tracking, transcript sentiment/linguistics, and metadata to create comparable candidate profiles.</li>
+        <li>Operationalized consistent metrics: speech speed, conciseness, confidence, enthusiasm, gaze percentage, blink rate, eye offset, emotional range.</li>
+        <li>Integrated cross-signal evidence to produce recruitment recommendations with rationale and confidence levels per profile.</li>
+      </ul>
+      <div class="modal-section-label">Outcome</div>
+      <ul class="modal-list"><li>Delivered consistent hire/consider/reject recommendations across 9 candidates, enabling data-driven shortlisting with explicit confidence notes.</li></ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-lowdata">
+  <div class="modal">
+    <div class="modal-header">
+      <div><span class="project-cat-badge badge-ml modal-badge">AI / ML | Aug–Nov 2024</span><div class="modal-title">Low-Data Multimodal Binary Classification</div><div class="modal-meta">CS771 | Prof. Piyush Rai · IIT Kanpur</div></div>
+      <button class="modal-close" onclick="closeModal('modal-lowdata')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section-label">Approach</div>
+      <ul class="modal-list">
+        <li>Tokenized emoticons; featurized deep embeddings and digit strings via flatten, standardize, and one-hot/positional encodings.</li>
+        <li>Rigorously benchmarked LSTM, SVM, Random Forest, XGBoost, CatBoost across 20–100% training splits to assess generalization under data scarcity.</li>
+        <li>Fused modalities via standardize → concatenate → PCA; retrained on combined feature set to improve robustness.</li>
+      </ul>
+      <div class="modal-section-label">Outcome</div>
+      <ul class="modal-list">
+        <li>98.8% validation accuracy on best single-modality models.</li>
+        <li>94.5% with fused SVM, proving multi-modal effectiveness.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-education">
+  <div class="modal">
+    <div class="modal-header">
+      <div><span class="project-cat-badge badge-data modal-badge">Data Science | Jan–Apr 2025</span><div class="modal-title">Data-Driven Analysis of Educational Outcome Trends in India</div><div class="modal-meta">DMS692 | Prof. Nivedita Bhaktha · IIT Kanpur</div></div>
+      <button class="modal-close" onclick="closeModal('modal-education')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section-label">Approach</div>
+      <ul class="modal-list">
+        <li>Analyzed 1,400+ records across 14 variables spanning 2017–2021 NDAP education datasets.</li>
+        <li>Performed data cleaning, EDA, and visualization to reveal cross-state trends and disparities.</li>
+        <li>Applied PCA and Factor Analysis reducing 7 performance metrics into 3 interpretable indicators (84% variance explained).</li>
+        <li>Ran MANOVA/ANOVA tests for year-wise and regional differences; validated assumptions for robust inference.</li>
+      </ul>
+      <div class="modal-section-label">Outcome</div>
+      <ul class="modal-list"><li>Identified significant performance shifts (p &lt; 0.001) with data-backed recommendations for targeted policy interventions and resource allocation.</li></ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-bayesian">
+  <div class="modal">
+    <div class="modal-header">
+      <div><span class="project-cat-badge badge-data modal-badge">Data Science | May–Jul 2024</span><div class="modal-title">Bayesian Analysis and Inference</div><div class="modal-meta">Summer Project | Stamatics, IIT Kanpur</div></div>
+      <button class="modal-close" onclick="closeModal('modal-bayesian')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section-label">Approach</div>
+      <ul class="modal-list">
+        <li>Mastered Bayes' theorem and applied it to real-life scenarios enhancing predictive analysis and decision-making.</li>
+        <li>Developed hierarchical models using PyMC and ArviZ libraries; implemented probabilistic frameworks in Python.</li>
+        <li>Applied probabilistic programming to innovate on traditional models like Linear Regression and Regression Trees.</li>
+      </ul>
+      <div class="modal-section-label">Outcome</div>
+      <ul class="modal-list"><li>Demonstrated advanced statistical programming skills facilitating informed and strategic decision-making via probabilistic frameworks.</li></ul>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-candle">
+  <div class="modal">
+    <div class="modal-header">
+      <div><span class="project-cat-badge badge-chem modal-badge">Chemical Eng. | Oct–Nov 2024</span><div class="modal-title">Candle Dynamics and Combustion Characterization</div><div class="modal-meta">CHE331 | Prof. Raj Ganesh S. Pala · IIT Kanpur</div></div>
+      <button class="modal-close" onclick="closeModal('modal-candle')"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section-label">Approach</div>
+      <ul class="modal-list">
+        <li>Performed 10,000-run Monte Carlo simulations analyzing parameter influence on combustion and heat transfer behavior.</li>
+        <li>Plotted mass loss, burn rate, and heat transfer rate distributions using Seaborn and Matplotlib visualizations.</li>
+        <li>Implemented feedforward neural network in Keras for regression mapping candle dimensions and time to mass.</li>
+        <li>Determined order of reaction by comparing linear fits on transformed mass–time data for kinetic modeling.</li>
+      </ul>
+      <div class="modal-section-label">Outcome</div>
+      <ul class="modal-list"><li>Identified zero-order reaction as best fit with R² = 0.9998, confirming rate independence from wax concentration.</li></ul>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── LOADER ───
+window.addEventListener('load',()=>{
+  setTimeout(()=>{document.getElementById('loader').classList.add('done');},1400);
+});
+
+// ─── CURSOR ───
+const cursor=document.getElementById('cursor');
+const ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+function animateRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animateRing);}
+animateRing();
+document.querySelectorAll('a,button,.project-card,.comp-card,.por-card,.skill-cat').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.classList.add('active');ring.classList.add('active');});
+  el.addEventListener('mouseleave',()=>{cursor.classList.remove('active');ring.classList.remove('active');});
+});
+
+// ─── NAV SCROLL ───
+const navbar=document.getElementById('navbar');
+const navLinks=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  navbar.classList.toggle('scrolled',window.scrollY>50);
+  const sections=document.querySelectorAll('section[id]');
+  let current='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)current=s.id;});
+  navLinks.forEach(a=>{
+    a.classList.remove('active');
+    if(a.getAttribute('href')==='#'+current)a.classList.add('active');
+  });
+});
+
+// ─── MOBILE MENU ───
+document.getElementById('mobileBtn').onclick=()=>document.getElementById('mobileMenu').classList.add('open');
+document.getElementById('mobileClose').onclick=closeMobileMenu;
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');}
+
+// ─── TYPED TEXT ───
+const phrases=['Chemical Engineer','ML Practitioner','Data Scientist','Product Thinker','Catalyst Researcher'];
+let pi=0,ci=0,deleting=false;
+function typeEffect(){
+  const el=document.getElementById('typedText');
+  if(!el)return;
+  const phrase=phrases[pi];
+  if(!deleting){
+    el.textContent=phrase.substring(0,ci+1);ci++;
+    if(ci===phrase.length){setTimeout(()=>{deleting=true;typeEffect();},1800);return;}
+  }else{
+    el.textContent=phrase.substring(0,ci-1);ci--;
+    if(ci===0){deleting=false;pi=(pi+1)%phrases.length;}
+  }
+  setTimeout(typeEffect,deleting?50:80);
+}
+setTimeout(typeEffect,1600);
+
+// ─── INTERSECTION OBSERVER ───
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:.1});
+document.querySelectorAll('.reveal,.project-card,.skill-cat,.comp-card,.por-card,.edu-item,.exp-card').forEach(el=>observer.observe(el));
+
+// Add stagger delays to project cards
+document.querySelectorAll('.project-card').forEach((el,i)=>{el.style.transitionDelay=`${i*0.06}s`;});
+document.querySelectorAll('.skill-cat').forEach((el,i)=>{el.style.transitionDelay=`${i*0.05}s`;});
+
+// ─── PROJECT FILTER ───
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter=btn.dataset.filter;
+    document.querySelectorAll('.project-card').forEach(card=>{
+      const match=filter==='all'||card.dataset.category===filter;
+      card.classList.toggle('hidden',!match);
+    });
+  });
+});
+
+// ─── MODALS ───
+function openModal(id){
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(id){
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow='';
+}
+document.querySelectorAll('.modal-overlay').forEach(overlay=>{
+  overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal(overlay.id);});
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')document.querySelectorAll('.modal-overlay.open').forEach(o=>closeModal(o.id));
+});
+
+// ─── CONTACT FORM ───
+function handleFormSubmit(){
+  const name=document.getElementById('formName').value;
+  const email=document.getElementById('formEmail').value;
+  const subject=document.getElementById('formSubject').value;
+  const msg=document.getElementById('formMsg').value;
+  if(!name||!email||!msg){
+    const st=document.getElementById('formStatus');
+    st.style.color='var(--pink)';st.textContent='Please fill in all required fields.';st.style.display='block';return;
+  }
+  const mailtoLink=`mailto:bhavishyap22@iitk.ac.in?subject=${encodeURIComponent(subject||'Portfolio Inquiry')}&body=${encodeURIComponent(`Hi Bhavishya,\n\n${msg}\n\nBest,\n${name}\n${email}`)}`;
+  window.location.href=mailtoLink;
+  const st=document.getElementById('formStatus');
+  st.style.color='var(--cyan)';st.textContent='Opening your email client...';st.style.display='block';
+}
+
+// ─── SMOOTH HERO PARALLAX ───
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  const heroBg=document.querySelector('.hero-bg');
+  if(heroBg)heroBg.style.transform=`translateY(${y*0.3}px)`;
+});
+</script>
+</body>
+</html>
